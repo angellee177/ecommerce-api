@@ -91,10 +91,9 @@ describe("/Login User", () => {
     it("it should be able to let User Login", (done)=> {
         let login = new User({name: "angel", email: "example@testing.com", password: "password"});
         login.save();
-        console.log(login)
         chai.request(server)
         .post('/api/auth/login')
-        .send({email: "example@testing.com", password: "password"})
+        .send({email: login.email, password: login.password})
         .end((err, res)=> {
             res.should.have.status(200);
             res.body.should.have.property('success').equal(true);
@@ -236,9 +235,9 @@ describe("/SHOW User by ID", ()=> {
         // new User to show by ID
         let user_2 = new User({name: "User 2", email: "show@byId.com", password: "password"})
         user_2.save();
-        console.log(user_2)
+        console.log(user_2._id)
             chai.request(server)
-            .get('/api/user/'+ user_2._id)
+            .get('/api/user/find/'+ user_2._id)
             .set("authentication-token", token)
             .end((err, res)=> {
                 res.should.have.status(200);

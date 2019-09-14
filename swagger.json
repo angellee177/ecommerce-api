@@ -459,7 +459,7 @@
     "securityDefinitions": {
       "Authorization": {
         "type": "apiKey",
-        "name": "token",
+        "name": "authorization-token",
         "in": "header",
         "example": "Bearer insert_token_here"
       }

@@ -3,7 +3,6 @@ image: node:latest
 stages:
   - build
   - production
-  - test
   
 proses compile:
   stage: build
@@ -21,9 +20,3 @@ production:
     - dpl --provider=heroku --app=angel-ecommerce --api-key=$HEROKU_API_KEY
   only:
     - master
-
-
-test:
-  script:
-  - npm install
-  - npm test

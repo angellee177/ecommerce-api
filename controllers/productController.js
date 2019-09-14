@@ -5,7 +5,7 @@ const User = require('../models/user');
 // 1. Create new Product
 async function createProduct(req, res){
     let user = await User.findById(req.user._id)
-
+    
     const product = new Product({name: req.body.name, description: req.body.description, 
     price: req.body.price, qty: req.body.qty, user: req.user._id})
     const result = await product.save();
@@ -46,7 +46,6 @@ async function updateProduct(req, res){
         $set: {name: req.body.name, description: req.body.description, 
         price: req.body.price, qty: req.body.qty, user: req.user._id}
     },{new: true}.populate("user", "name"))
-
     // if cannot find product with parameter ID
     if(!update_product) return res.status(422).json(errorMessage("failed to update product"));
 

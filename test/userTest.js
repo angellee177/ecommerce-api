@@ -225,3 +225,26 @@ describe("/Update User by ID", ()=> {
     })
 })
 
+
+// 7. SHOW USER BY ID
+describe("/SHOW User by ID", ()=> {
+    it("it should show user By Id", (done) =>{
+        let newUser = new User({name: "user", email:"show@example.com", password:"password"});
+        newUser.save()
+        let user_token = newUser.generateAuthToken()
+        let token = `bearer ${user_token}`;
+        // new User to show by ID
+        let user_2 = new User({name: "User 2", email: "show@byId.com", password: "password"})
+        user_2.save();
+        console.log(user_2)
+            chai.request(server)
+            .get('/api/user/'+ user_2._id)
+            .set("authentication-token", token)
+            .end((err, res)=> {
+                res.should.have.status(200);
+                res.body.should.have.property('success').equal(true);
+                res.body.should.have.property('message').equal("here is the user Information: ");
+                done();
+            })
+    })
+})

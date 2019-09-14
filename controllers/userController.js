@@ -68,9 +68,8 @@ async function updateUser(req, res){
                 $set: {name: req.body.name, email: req.body.email}
             }, {new: true}
         );
-    if(!userUpdate) return res.status(422).json(errorMessage("failed update user"));
 
-            res.status(200).json(success(userUpdate, "successfully Update User"))
+    res.status(200).json(success(userUpdate, "successfully Update User"))
 }
 
 

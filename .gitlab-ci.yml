@@ -3,17 +3,12 @@ image: node:latest
 stages:
   - build
   - production
-  - test
   
 proses compile:
   stage: build
   script: 
     - npm install
 
-test:
-  script:
-  - npm install
-  - npm test
 
 production:
   type: deploy

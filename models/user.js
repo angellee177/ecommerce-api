@@ -13,19 +13,24 @@ const userSchema = new Schema (
     {
         name: {
             type: String,
-            required: true,
-            lowercase: true
+            required: [true, "username is required"],
+            lowercase: true,
         },
         email: {
             type: String,
             lowercase: true,
-            required: true,
+            required: [true, "email is not allowed to be empty"],
             validate: function (email){
                 return /^[a-zA-Z0-9.!#$%&’*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)
             }
         },
         password: {
             type: String
+        },
+        user_type: {
+            type: String,
+            enum: ['merchant', 'buyer', 'superAdmin'],
+            default: "buyer"
         },
         product: [{type: Schema.Types.ObjectId, ref: 'Product'}],
         order: [{type: Schema.Types.ObjectId, ref: "Order"}]

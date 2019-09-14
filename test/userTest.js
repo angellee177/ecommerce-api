@@ -214,7 +214,7 @@ describe("/Update User by ID", ()=> {
             chai.request(server)
             .put('/api/user/update')
             .set("authentication-token", token)
-            .send({name: "update name", email:"update@test.com"})
+            .send({name: "update name", email:"update@test.com", user_type: "buyer"})
             .end((err, res)=> {
                 res.should.have.status(200);
                 res.body.should.have.property('success').equal(true);

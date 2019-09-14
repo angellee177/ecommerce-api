@@ -6,8 +6,10 @@ const _ = require('lodash');
 const bcrypt = require('bcryptjs');
 
 
+
 // 1. Register New User Function
 async function newUser(req, res){
+
     // to check if email already register
     let user = await User.findOne({ email: req.body.email });
     if (user) return res.status(422).send(errorMessage('User already Registered.'));
@@ -65,7 +67,7 @@ async function currentUser(req, res){
 async function updateUser(req, res){
     const userUpdate = await User.findByIdAndUpdate(req.user._id,
             {
-                $set: {name: req.body.name, email: req.body.email}
+                $set: {name: req.body.name, email: req.body.email, user_type: req.body.user_type}
             }, {new: true}
         );
 

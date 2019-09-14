@@ -23,6 +23,6 @@ production:
     - apt-get update -qy
     - apt-get install -y ruby-dev
     - gem install dpl
-    - dpl --provider=heroku --app=angel-article-api --api-key=$HEROKU_API_KEY
+    - dpl --provider=heroku --app=angel-ecommerce --api-key=$HEROKU_API_KEY
   only:
     - master

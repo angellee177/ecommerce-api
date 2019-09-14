@@ -2,12 +2,18 @@ image: node:latest
 
 stages:
   - build
+  - test
   - production
   
 proses compile:
   stage: build
   script: 
     - npm install
+
+test:
+  script:
+  - npm install
+  - npm test
 
 production:
   type: deploy
@@ -17,6 +23,6 @@ production:
     - apt-get update -qy
     - apt-get install -y ruby-dev
     - gem install dpl
-    - dpl --provider=heroku --app=ga-todo-api --api-key=$HEROKU_API_KEY
+    - dpl --provider=heroku --app=angel-article-api --api-key=$HEROKU_API_KEY
   only:
     - master

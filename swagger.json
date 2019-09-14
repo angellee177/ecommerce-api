@@ -1,0 +1,546 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "description": "This is API Documentation.",
+      "version": "1.0.0",
+      "title": "Express Auth",
+      "contact": {
+        "email": "angelriapurnamasari17@gmail.com"
+      },
+      "license": {
+        "name": "Apache 2.0",
+        "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+      }
+    },
+    "host": "",
+    "basePath": "/api",
+    "tags": [
+      {
+        "name": "Glints Academy Ecommerce Mini Project",
+        "description": "Operations about User, Product, Order & Order Detail",
+        "externalDocs": {
+          "description": "Find out more about our API",
+          "url": "http://swagger.io"
+        }
+      }
+    ],
+    "schemes": [
+      "http",
+      "https"
+    ],
+    "paths": {
+      "/user/": {
+        "get": {
+          "tags": [
+            "User Operation"
+          ],
+          "summary": "Show All User",
+          "description": "Show all user registered",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "All user showed."
+            }
+          }
+        }
+      },
+      "/auth/register": {
+        "post": {
+          "tags": [
+            "User Operation"
+          ],
+          "summary": "Register User",
+          "description": "Regiter an user",
+          "operationId": "addUser",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Users that will be registered on database",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/UserRegister"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "success"
+            },
+            "422":{
+              "description": "email already register"
+            }
+          }
+        }
+      },
+      "/auth/login": {
+        "post": {
+          "tags": [
+            "User Operation"
+          ],
+          "summary": "Login User",
+          "description": "Login to registered user",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Will post email and password to database and database will check if it's true or not.",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/UserLogin"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "success login"
+            },
+            "422":{
+              "description": "email not register"
+            },
+            "421":{
+              "description": "password are invalid"
+            }
+          }
+        }
+      },
+      "/auth/profile": {
+        "get": {
+          "tags": [
+            "User Operation"
+          ],
+          "summary": "current User",
+          "description": "show Current User Information",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "current user information:"
+            },
+            "404": {
+              "description": "Invalid user"
+            }
+          },
+          "security": [
+            {
+              "Authorization": []
+            }
+          ]
+        }
+      },
+      "/user/find/{id}": {
+        "get": {
+          "tags": [
+            "User Operation"
+          ],
+          "summary": "Show User",
+          "description": "Get detail User list",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              
+              "required": true,
+              "description": "ID of the todo that we want to show",
+              "type": "string",
+              "schema": {
+                "$ref": "#/definitions/UserLogin"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "If access is given. It will show Todo details."
+            }
+          },
+          "security": [
+            {
+              "Authorization": []
+            }
+          ]
+        }
+      },
+      "/user/delete/{id}": {
+        "delete": {
+          "tags": [
+            "User Operation"
+          ],
+          "summary": "Delete User",
+          "description": "Delete current user",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              
+              "required": true,
+              "description": "ID of the user that we want delete",
+              "type": "string",
+              "schema": {
+                "$ref": "#/definitions/UserLogin"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "If access is given. It will delete current user."
+            }
+          },
+          "security": [
+            {
+              "Authorization": []
+            }
+          ]
+        }
+      },
+      "/user/update/{id}": {
+        "delete": {
+          "tags": [
+            "User Operation"
+          ],
+          "summary": "Update User",
+          "description": "Update current User",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              
+              "required": true,
+              "description": "ID of the user that we want delete",
+              "type": "string",
+              "schema": {
+                "$ref": "#/definitions/UserLogin"
+              }
+            },
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Will Update User to database and database will check if it's true or not.",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/UserRegister"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "If access is given. It will delete current user."
+            }
+          },
+          "security": [
+            {
+              "Authorization": []
+            }
+          ]
+        }
+      },
+      "/product": {
+        "get": {
+          "tags": [
+            "Product Operation"
+          ],
+          "summary": "Show All Product",
+          "description": "Show all Product List",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "All Product showed."
+            }
+          }
+        }
+      },
+      "/todo/new": {
+        "post": {
+          "tags": [
+            "Todo Operation"
+          ],
+          "summary": "Create new Todo",
+          "description": "make a new Todo List",
+          "operationId": "addTodo",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Todo will save to Database",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/Task"
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "User successfully created."
+            }
+          },
+          "security": [
+            {
+              "Authorization": []
+            }
+          ]
+        }
+      },
+      "/todo/show/{id}": {
+        "get": {
+          "tags": [
+            "Todo Operation"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "description": "ID of the todo that we want to show",
+              "type": "string",
+              "schema": {
+                "$ref": "#/definitions/Task"
+              }
+            }
+          ],
+          "summary": "Show Todo",
+          "description": "Get detail Todo list",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "If access is given. It will show Todo details."
+            }
+          },
+          "security": [
+            {
+              "Authorization": []
+            }
+          ]
+        }
+      },
+      "/todo/update/{id}": {
+        "put": {
+          "tags": [
+            "Todo Operation"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              
+              "required": true,
+              "description": "ID of the todo that we want to show",
+              "type": "string",
+              "schema": {
+                "$ref": "#/definitions/Task"
+              }
+            },
+            {
+              "name": "body",
+              "in": "body",
+              
+              "required": true,
+              "description": "ID of the todo that we want to show",
+              "type": "string",
+              "schema": {
+                "$ref": "#/definitions/UpdateTask"
+              }
+            }
+          ],
+          "summary": "Update Todo",
+          "description": "Update Todo",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "if the ID is right, it will update the Todo."
+            }
+          },
+          "security": [
+            {
+              "Authorization": []
+            }
+          ]
+        }
+      },
+      "/todo/delete/{id}": {
+        "delete": {
+          "tags": [
+            "Todo Operation"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "description": "ID of the todo that we want to delete",
+              "type": "string",
+              "schema": {
+                "$ref": "#/definitions/Task"
+              }
+            }
+          ],
+          "summary": "Delete Todo",
+          "description": "Delete todo based id",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "delete todo based on Id"
+            },
+            "422": {
+              "description": "there is something wrong with your ID"
+            }
+          },
+          "security": [
+            {
+              "Authorization": []
+            }
+          ]
+        }
+      }
+    },
+    "securityDefinitions": {
+      "Authorization": {
+        "type": "apiKey",
+        "name": "token",
+        "in": "header",
+        "example": "Bearer insert_token_here"
+      }
+    },
+    "definitions": {
+      "UserRegister": {
+        "type": "object",
+        "required": [
+          "name",
+          "email",
+          "password"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "example":"angel"
+          },
+          "email": {
+            "type": "string",
+            "example": "angel@mail.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "password"
+          }
+        }
+      },
+      "UserLogin": {
+        "type": "object",
+        "required": [
+          "email",
+          "password"
+        ],
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "angel@mail.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "password"
+          }
+        }
+      },
+      "Task": {
+        "type": "object",
+        "required": [
+          "task",
+          "status"
+        ],
+        "properties": {
+          "task": {
+            "type": "string",
+            "example": "task 1"
+          },
+          "status": {
+            "type": "string",
+            "example": "false"
+          }
+        }
+      },
+      "UpdateTask": {
+        "type": "object",
+        "required": [
+          "task",
+          "status"
+        ],
+        "properties": {
+          "task": {
+            "type": "string",
+            "example": "task updated"
+          },
+          "status": {
+            "type": "string",
+            "example": "true"
+          }
+        }
+      }
+    },
+    "externalDocs": {
+      "description": "Find out more about Swagger",
+      "url": "http://swagger.io"
+    }
+  }

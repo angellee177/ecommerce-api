@@ -1,0 +1,37 @@
+{
+  "name": "ecommerce",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "engines": {
+    "node": "10.16.3",
+    "npm": "5.0.3"
+  },
+  "scripts": {
+    "test": "nyc --reporter=html mocha test/* --exit",
+    "coverage": "nyc --report-dir=./public/coverage --reporter=html npm run test",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@hapi/joi": "^16.0.1",
+    "bcryptjs": "^2.4.3",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "config": "^3.2.2",
+    "cors": "^2.8.5",
+    "dotenv": "^8.1.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mocha": "^6.2.0",
+    "mongoose": "^5.7.1",
+    "nodemon": "^1.19.2",
+    "nyc": "^14.1.1",
+    "swagger-ui-express": "^4.1.0"
+  }
+}

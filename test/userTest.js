@@ -247,3 +247,27 @@ describe("/SHOW User by ID", ()=> {
             })
     })
 })
+
+
+// 7. GET ERROR STATUS(422) FROM SHOW USER ID
+describe("/GET ERROR STATUS(422) User by ID", ()=> {
+    it("it should Get error status(422)", (done) =>{
+        let newUser = new User({name: "user", email:"show@example.com", password:"password"});
+        newUser.save()
+        let user_token = newUser.generateAuthToken()
+        let token = `bearer ${user_token}`;
+        // new User to show by ID
+        let user_2 = new User({name: "User 2", email: "show@byId.com", password: "password"})
+        user_2.save();
+        console.log(user_2._id)
+            chai.request(server)
+            .get('/api/user/find/5d7b9b63f310243fc93004e8')
+            .set("authentication-token", token)
+            .end((err, res)=> {
+                res.should.have.status(422);
+                res.body.should.have.property('success').equal(false);
+                res.body.should.have.property('message').equal("cannot find User");
+                done();
+            })
+    })
+})

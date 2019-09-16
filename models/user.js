@@ -33,7 +33,7 @@ const userSchema = new Schema (
             default: "buyer"
         },
         product: [{type: Schema.Types.ObjectId, ref: 'Product'}],
-        cart: []
+        cart: [{type: Schema.Types.ObjectId, ref: 'Cart'}]
     }
 )
 
@@ -43,14 +43,6 @@ userSchema.methods.generateAuthToken = function(){
     const token = jwt.sign({_id: this._id, name: this.name, email: this.email, password: this.password}, config.get('jwtPrivateKey'))
     return token;
 }
-
-
-// Bcrypt the Password before saving User Data
-userSchema.pre('save', function (next) {
-    let user = this
-    user.password = bcrypt.hashSync(user.password, saltRounds);
-    next()
-})
 
 
 const User = mongoose.model("User", userSchema);

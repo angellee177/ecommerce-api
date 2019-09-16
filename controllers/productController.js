@@ -9,7 +9,7 @@ async function createProduct(req, res){
     const product = new Product({name: req.body.name, description: req.body.description, 
     price: req.body.price, stock: req.body.stock, user: req.user._id})
     const result = await product.save();
-    
+    console.log(result)
     // save to User Schema
     user.product.push(product);
     await user.save();

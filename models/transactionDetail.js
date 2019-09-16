@@ -8,7 +8,7 @@ const orderSchema = new Schema(
         user: {
             type: Schema.Types.ObjectId, ref: "User"
         },
-        summary: [],
+        cart: [{type: Schema.Types.ObjectId, ref: "Cart"}],
         totalPrice: {
             type: Number
         }
@@ -19,18 +19,19 @@ const orderSchema = new Schema(
 orderSchema.pre('save', async function (next) {
     let order = this
     let total = 0
-    for(let i = 0; i < order.summary.length; i++){
-        const product = await Product.findOne({_id: order.summary[i].product._id});
-        total = total + order.summary[i].subprice
-        product.stock = product.stock - order.summary[i].qty
-            product.save().then(()=>{
-                if(i === order.summary.length - 1){
-                    order.totalPrice = total
-                    order.save()
-                    return next()
-                }
-                return
-            })
+    for(let i = 0; i < order.cart.length; i++){
+        console.log(order.cart.subprice)
+        // const product = await Product.findOne({_id: order.summary[i].cart._id});
+        // total = total + order.summary[i].subprice
+        // product.stock = product.stock - order.summary[i].qty
+        //     product.save().then(()=>{
+        //         if(i === order.summary.length - 1){
+        //             order.totalPrice = total
+        //             order.save()
+        //             return next()
+        //         }
+        //         return
+        //     })
         }
    
 })

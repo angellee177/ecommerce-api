@@ -15,6 +15,9 @@ async function newUser(req, res){
     if (user) return res.status(422).send(errorMessage('User already Registered.'));
     // create new user
     user = new User({name: req.body.name, email: req.body.email, password: req.body.password});
+     // Encrypt the Password
+     const saltRounds = 10;
+     user.password = await bcrypt.hashSync(user.password, saltRounds)
     // save the User
     const result = await user.save();
     // response or output from function    
@@ -29,6 +32,7 @@ async function LoginUser(req, res){
 
    // check if the password that store in DB same with the User input
    const validPassword = await bcrypt.compare(req.body.password, user.password)
+   console.log(validPassword, user.password, req.body.password)
    if(!validPassword) return res.status(422).json(errorMessage("wrong password"))
    
    // generate json Token

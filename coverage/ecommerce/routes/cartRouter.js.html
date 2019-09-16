@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Code coverage report for ecommerce/routes/productRouter.js</title>
+    <title>Code coverage report for ecommerce/routes/cartRouter.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -16,13 +16,13 @@
 <div class='wrapper'>
   <div class='pad1'>
     <h1>
-      <a href="../../index.html">All files</a> / <a href="index.html">ecommerce/routes</a> productRouter.js
+      <a href="../../index.html">All files</a> / <a href="index.html">ecommerce/routes</a> cartRouter.js
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>9/9</span>
+        <span class='fraction'>8/8</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -37,7 +37,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>9/9</span>
+        <span class='fraction'>8/8</span>
       </div>
     </div>
     <p class="quiet">
@@ -56,12 +56,10 @@
 <a name='L8'></a><a href='#L8'>8</a>
 <a name='L9'></a><a href='#L9'>9</a>
 <a name='L10'></a><a href='#L10'>10</a>
-<a name='L11'></a><a href='#L11'>11</a>
-<a name='L12'></a><a href='#L12'>12</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L11'></a><a href='#L11'>11</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -69,14 +67,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const router = require('express').Router();
-const productController = require('../controllers/productController');
-const auth =  require('../middleware/auth');
+const cartController = require('../controllers/cartController');
+const auth =require('../middleware/auth');
 &nbsp;
-router.post('/new', auth, productController.createProduct);
-router.get('/', productController.showProduct);
-router.get('/find/:id', auth, productController.showProductID);
-router.put('/update/:id', auth, productController.updateProduct);
-router.delete('/delete/:id', auth, productController.deleteProduct);
+router.post('/', auth, cartController.newCart);
+router.get('/list', cartController.showCart)
+router.put('/update/:id', auth, cartController.updateCart);
+router.delete('/delete/:id', auth, cartController.deleteCart)
 &nbsp;
 module.exports = router
 &nbsp;</pre></td></tr>

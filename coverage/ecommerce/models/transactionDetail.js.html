@@ -20,31 +20,31 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">35% </span>
+        <span class="strong">58.33% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>7/20</span>
+        <span class='fraction'>7/12</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/2</span>
+        <span class='fraction'>0/0</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/2</span>
+        <span class='fraction'>0/1</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">36.84% </span>
+        <span class="strong">63.64% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>7/19</span>
+        <span class='fraction'>7/11</span>
       </div>
     </div>
     <p class="quiet">
       Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
     </p>
   </div>
-  <div class='status-line low'></div>
+  <div class='status-line medium'></div>
 <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -89,7 +89,8 @@
 <a name='L41'></a><a href='#L41'>41</a>
 <a name='L42'></a><a href='#L42'>42</a>
 <a name='L43'></a><a href='#L43'>43</a>
-<a name='L44'></a><a href='#L44'>44</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L44'></a><a href='#L44'>44</a>
+<a name='L45'></a><a href='#L45'>45</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -112,15 +113,16 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -142,7 +144,7 @@ const orderSchema = new Schema(
         user: {
             type: Schema.Types.ObjectId, ref: "User"
         },
-        summary: [],
+        cart: [{type: Schema.Types.ObjectId, ref: "Cart"}],
         totalPrice: {
             type: Number
         }
@@ -153,18 +155,19 @@ const orderSchema = new Schema(
 orderSchema.pre('save', <span class="fstat-no" title="function not covered" >as</span>ync function (next) {
     let order = <span class="cstat-no" title="statement not covered" >this</span>
     let total = <span class="cstat-no" title="statement not covered" >0</span>
-<span class="cstat-no" title="statement not covered" >    for(let i = <span class="cstat-no" title="statement not covered" >0;</span> i &lt; order.summary.length; i++){</span>
-        const product = <span class="cstat-no" title="statement not covered" >await Product.findOne({_id: order.summary[i].product._id});</span>
-<span class="cstat-no" title="statement not covered" >        total = total + order.summary[i].subprice</span>
-<span class="cstat-no" title="statement not covered" >        product.stock = product.stock - order.summary[i].qty</span>
-<span class="cstat-no" title="statement not covered" >            product.save().then(<span class="fstat-no" title="function not covered" >()</span>=&gt;{</span>
-<span class="cstat-no" title="statement not covered" >                if(i === order.summary.length - 1){</span>
-<span class="cstat-no" title="statement not covered" >                    order.totalPrice = total</span>
-<span class="cstat-no" title="statement not covered" >                    order.save()</span>
-<span class="cstat-no" title="statement not covered" >                    return next()</span>
-                }
-<span class="cstat-no" title="statement not covered" >                return</span>
-            })
+<span class="cstat-no" title="statement not covered" >    for(let i = <span class="cstat-no" title="statement not covered" >0;</span> i &lt; order.cart.length; i++){</span>
+<span class="cstat-no" title="statement not covered" >        console.log(order.cart.subprice)</span>
+        // const product = await Product.findOne({_id: order.summary[i].cart._id});
+        // total = total + order.summary[i].subprice
+        // product.stock = product.stock - order.summary[i].qty
+        //     product.save().then(()=&gt;{
+        //         if(i === order.summary.length - 1){
+        //             order.totalPrice = total
+        //             order.save()
+        //             return next()
+        //         }
+        //         return
+        //     })
         }
    
 })
@@ -181,7 +184,7 @@ module.exports = Order;
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sun Sep 15 2019 22:12:50 GMT+0700 (Western Indonesia Time)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Sep 16 2019 16:46:13 GMT+0700 (Western Indonesia Time)
 </div>
 </div>
 <script src="../../prettify.js"></script>

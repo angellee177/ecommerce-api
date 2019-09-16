@@ -7,6 +7,5 @@ router.get('/', userController.showUserList);
 router.get('/find/:id', auth, userController.showUserById);
 router.put('/update', auth, userController.updateUser);
 router.delete('/delete/:id', auth, userController.deleteUser);
-router.put('/cart/:id/:qty', auth, transactionController.addToCart);
 
 module.exports = router

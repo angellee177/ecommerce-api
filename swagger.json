@@ -226,7 +226,7 @@
         }
       },
       "/user/update/{id}": {
-        "delete": {
+        "put": {
           "tags": [
             "User Operation"
           ],
@@ -256,7 +256,7 @@
               "description": "Will Update User to database and database will check if it's true or not.",
               "required": true,
               "schema": {
-                "$ref": "#/definitions/UserRegister"
+                "$ref": "#/definitions/UserUpdate"
               }
             }
           ],
@@ -501,6 +501,28 @@
           "password": {
             "type": "string",
             "example": "password"
+          }
+        }
+      },
+      "UserUpdate": {
+        "type": "object",
+        "required": [
+          "name",
+          "email",
+          "user_type"
+        ],
+        "properties": {
+          "name": {
+            "type":"string",
+            "example": "update name"
+          },
+          "email": {
+            "type": "string",
+            "example": "update@mail.com"
+          },
+          "user_type": {
+            "type": "string",
+            "example": "merchant"
           }
         }
       },

@@ -23,12 +23,10 @@ app.use("/api", router);
 
 app.get("/", (req, res) => {
 res.status(200).json({
-success: true,
-message: "welcome to API"
+    success: true,
+    message: "welcome to API"
+  });
 });
-});
-
-
 
 
 // get Swagger File for documentation
@@ -43,6 +41,13 @@ app.use(
         extended: true
     })
 );
+
+
+
+// Root Path, get the Public Path
+app.use(express.static('public'))
+
+
 
 // to connect with the DB
 try{

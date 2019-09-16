@@ -10,7 +10,7 @@ chai.use(chaihttp);
 chai.should();
 
 
-afterEach(done => {
+after(done => {
     User.deleteMany({})
         .then(result => {
             done();
@@ -44,6 +44,8 @@ describe("/GET User List", ()=> {
         .get('/api/user')
         .end((err, res)=> {
             res.should.have.status(200);
+            res.body.should.have.property('success').equal(true);
+            res.body.should.have.property('message').equal("here is your user list");
             done();
         })
     })

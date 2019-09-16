@@ -5,9 +5,9 @@ const User = require('../models/user');
 // 1. Create new Product
 async function createProduct(req, res){
     let user = await User.findById(req.user._id)
-    
+
     const product = new Product({name: req.body.name, description: req.body.description, 
-    price: req.body.price, qty: req.body.qty, user: req.user._id})
+    price: req.body.price, stock: req.body.stock, user: req.user._id})
     const result = await product.save();
     
     // save to User Schema
@@ -44,7 +44,7 @@ async function updateProduct(req, res){
 
     const update_product = await Product.findByIdAndUpdate(req.params.id, {
         $set: {name: req.body.name, description: req.body.description, 
-        price: req.body.price, qty: req.body.qty, user: req.user._id}
+        price: req.body.price, stock: req.body.stock, user: req.user._id}
     },{new: true}.populate("user", "name"))
     // if cannot find product with parameter ID
     if(!update_product) return res.status(422).json(errorMessage("failed to update product"));
@@ -66,9 +66,15 @@ async function deleteProduct(req, res){
     console.log(product)
 
     let user = await User.findOne({product: req.params.id})
-    if(!user) return res.status(421).json(err)
-    removeProduct
+    if(!user) return res.status(421).json(errorMessage("cannot find product in user"))
+    // delete product from User profile
+    removeProduct(user.product, product._id);
 
+    //  delete Product from Product Index
+    const delete_product = await Product.findByIdAndDelete(req.params.id)
+    if(!delete_product) return res.status(422).json(errorMessage("failed to delete"));
+
+    res.status(200).json(success(delete_product, "success delete product"))
 }
 
 

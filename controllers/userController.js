@@ -39,13 +39,9 @@ async function LoginUser(req, res){
 
 // 3. get the User List
 async function showUserList(req, res){
-    try{
         let userList = await User.find({})
     
         res.status(200).json(success(userList, "here is your user list"));
-    }catch(error){
-        console.log('error', error)
-    }
 }
 
 
@@ -60,13 +56,9 @@ async function deleteUser(req, res){
 
 // 5. Current User Profile
 async function currentUser(req, res){
-    try{
         let user = await User.findById(req.user._id);
-
+        // console.log(user)
         res.status(200).json(success(user, "user detail information: "))
-    }catch(error){
-        console.log(error)
-    }
 }
 
 

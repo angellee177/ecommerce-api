@@ -33,7 +33,7 @@ const userSchema = new Schema (
             default: "buyer"
         },
         product: [{type: Schema.Types.ObjectId, ref: 'Product'}],
-        order: [{type: Schema.Types.ObjectId, ref: "Order"}]
+        cart: []
     }
 )
 

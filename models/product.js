@@ -19,7 +19,7 @@ const productSchema = new Schema (
             type: Number,
             required: true
         },
-        qty: {
+        stock: {
             type: Number,
             required: true
         },
@@ -30,6 +30,7 @@ const productSchema = new Schema (
     }
 )
 
+//  to reduce the stock from cart qty
 const Product = mongoose.model("Product", productSchema);
 
 module.exports = Product;
